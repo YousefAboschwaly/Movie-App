@@ -10,14 +10,16 @@ export default function App() {
   console.log(data , error , isLoading);
 
   return (
-    <main>
+    <main >
       <div className="pattern"/>
       <div className="wrapper">
         <Header />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-      </div>
+
 
       <Movies movies={data || []} isLoading={isLoading} error={error} />
+
+      </div>
     </main>
   );
 }

@@ -26,6 +26,12 @@
     font-optical-sizing: auto;
     background: #030014;
   }
+  /* handle the Width of Container  */
+  .container {
+    @media (min-width: 1536px) {
+      max-width: 80rem !important; /* 1280px */
+    }
+  }
 
   h1 {
     @apply mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
@@ -97,7 +103,7 @@
     @apply space-y-9;
 
     & ul {
-      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+      @apply grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
     }
   }
 
