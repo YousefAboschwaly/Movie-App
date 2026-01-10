@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
+import useMovies from "./hooks/useMovies";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
+  const {data , isLoading , error} = useMovies()
+  console.log(data)
   return (
     <main>
       <div className="pattern"/>

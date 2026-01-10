@@ -1,9 +1,10 @@
 const API_BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = import.meta.env.VITE_API_TOKEN;
 const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: `Bearer YOUR_API_READ_ACCESS_TOKEN`,
+    Authorization: `Bearer ${API_KEY}`,
   },
 };
 
@@ -18,7 +19,7 @@ async function getAllMovies() {
     }
 
     const data = await response.json();
-    if(!data.Response === false) return[]
+    if (!data.Response === false) return [];
     return data.results;
   } catch (err) {
     throw new Error(err);
