@@ -24,11 +24,10 @@ async function getAllMovies() {
     if (!data.results || !Array.isArray(data.results)) return [];
 
     return data.results;
-  } catch (err) {
-   } catch (err) {
+  }  catch (err) {
      throw err;
    }
-  }
+  
 }
 
 export { getAllMovies };
