@@ -25,7 +25,9 @@ async function getAllMovies() {
 
     return data.results;
   } catch (err) {
-    throw new Error(err);
+   } catch (err) {
+     throw err;
+   }
   }
 }
 
