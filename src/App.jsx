@@ -4,6 +4,7 @@ import Search from "./components/Search";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
+
   return (
     <main>
       <div className="pattern"/>
