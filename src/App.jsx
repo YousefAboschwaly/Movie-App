@@ -7,6 +7,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const {data , isLoading , error} = useMovies()
   console.log(data , error , isLoading);
+
   return (
     <main>
       <div className="pattern"/>
