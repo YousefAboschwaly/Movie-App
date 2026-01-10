@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import useMovies from "./hooks/useMovies";
+import Movies from "./components/Movies";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -15,6 +16,8 @@ export default function App() {
         <Header />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       </div>
+
+      <Movies movies={data || []} isLoading={isLoading} error={error} />
     </main>
   );
 }
