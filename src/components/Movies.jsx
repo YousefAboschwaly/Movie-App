@@ -2,7 +2,7 @@ import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
 
 export default function Movies({ movies, isLoading, error  }) {
-  if (isLoading) return <Spinner />;
+    if (isLoading) return <div className="flex justify-center items-center"><Spinner /></div>;
   if (error) return <p className="text-red-500">{error?.message || error?.toString() || "An error occurred"}</p>;
 
   return <section className="all-movies ">
