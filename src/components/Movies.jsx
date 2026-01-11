@@ -1,7 +1,16 @@
+import { useState } from "react";
 import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
+import { useDebounce } from "react-use";
+import useMovies from "../hooks/useMovies";
 
-export default function Movies({ movies, isLoading, error  }) {
+export default function Movies({searchTerm}) {
+
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("")
+  useDebounce(()=>{setDebouncedSearchTerm(searchTerm)}, 1000, [searchTerm])
+
+  const {data:movies , isLoading , error} = useMovies({query: debouncedSearchTerm})
+
     if (isLoading) return <div className="flex justify-center items-center"><Spinner /></div>;
   if (error) return <p className="text-red-500">{error?.message || error?.toString() || "An error occurred"}</p>;
 

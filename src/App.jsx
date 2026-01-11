@@ -1,29 +1,20 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import Search from "./components/Search";
-import useMovies from "./hooks/useMovies";
 import Movies from "./components/Movies";
-import { useDebounce } from "react-use";
+import Search from "./components/Search";
 import TrendingMovies from "./components/TrendingMovies";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("")
-  useDebounce(()=>{setDebouncedSearchTerm(searchTerm)}, 1000, [searchTerm])
-
-  const {data , isLoading , error} = useMovies({query: debouncedSearchTerm})
-
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <main >
-      <div className="pattern"/>
+    <main>
+      <div className="pattern" />
       <div className="wrapper">
         <Header />
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-
-      <TrendingMovies/>
-      <Movies movies={data || []} isLoading={isLoading} error={error}  />
-
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <TrendingMovies />
+        <Movies searchTerm={searchTerm} />
       </div>
     </main>
   );
