@@ -70,6 +70,6 @@ export const getTrendingMovies = async () => {
     return result.rows;
   } catch (error) {
     console.error("Failed to fetch trending movies:", error);
-    return [];
+    throw error;
   }
 };
