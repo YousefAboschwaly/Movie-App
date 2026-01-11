@@ -4,6 +4,7 @@ import Search from "./components/Search";
 import useMovies from "./hooks/useMovies";
 import Movies from "./components/Movies";
 import { useDebounce } from "react-use";
+import TrendingMovies from "./components/TrendingMovies";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -20,7 +21,7 @@ export default function App() {
         <Header />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 
-
+      <TrendingMovies/>
       <Movies movies={data || []} isLoading={isLoading} error={error}  />
 
       </div>
