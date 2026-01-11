@@ -1,7 +1,7 @@
 import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
 
-export default function Movies({ movies, isLoading, error }) {
+export default function Movies({ movies, isLoading, error  }) {
   if (isLoading) return <Spinner />;
   if (error) return <p className="text-red-500">{error?.message || error?.toString() || "An error occurred"}</p>;
 

@@ -6,7 +6,7 @@ import Movies from "./components/Movies";
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
-  const {data , isLoading , error} = useMovies()
+  const {data , isLoading , error} = useMovies({query: searchTerm})
   console.log(data , error , isLoading);
 
   return (
@@ -17,7 +17,7 @@ export default function App() {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 
 
-      <Movies movies={data || []} isLoading={isLoading} error={error} />
+      <Movies movies={data || []} isLoading={isLoading} error={error}  />
 
       </div>
     </main>

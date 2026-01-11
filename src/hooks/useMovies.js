@@ -1,10 +1,10 @@
 
 import { useQuery } from '@tanstack/react-query';
-import { getAllMovies } from '../features/movieApis';
-export default function useMovies() {
+import { getMovies } from '../features/movieApis';
+export default function useMovies({ query }) {
   const {data , isLoading , error} = useQuery({
-    queryKey:["getAllMovies"],
-    queryFn: getAllMovies
+    queryKey:["getMovies", query],
+    queryFn: () => getMovies(query)
   })
   return {data , isLoading , error}
 }
