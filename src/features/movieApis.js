@@ -55,4 +55,22 @@ async function getMovies(query = "") {
   }
 }
 
-export { getMovies };
+/**
+ * Fetch movie details by movie ID from TMDB
+ *
+ * @param {number} movieId - TMDB movie ID
+ * @returns {Promise<Object>} Movie details
+ */
+async function getMovieDetails(movieId) {
+  const endpoint = `${API_BASE_URL}/movie/${movieId}`;
+
+  const response = await fetch(endpoint, API_OPTIONS);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie details");
+  }
+
+  return await response.json();
+}
+
+export { getMovies, getMovieDetails };

@@ -13,6 +13,8 @@ export default function App() {
 
   const {data , isLoading , error} = useMovies({query: debouncedSearchTerm})
 
+  
+
 
   return (
     <main >

@@ -1,6 +1,17 @@
+
 export default function MovieCard({
-  movie: { title, poster_path, vote_average, original_language, release_date },
+  movie: {
+    title,
+    poster_path,
+    vote_average,
+    original_language,
+    release_date,
+  },
 }) {
+
+
+
+
   return (
     <div className="movie-card">
       <img
