@@ -9,7 +9,6 @@ const client = new Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID);
 
 const tablesDB = new TablesDB(client);
 
-
 export const updateSearchCount = async (searchTerm, movie) => {
   // 1. Use Appwrite SDK to check if the search term exists in the database
   try {
@@ -18,13 +17,12 @@ export const updateSearchCount = async (searchTerm, movie) => {
       tableId: TABLE_ID,
       queries: [Query.equal("searchTerm", searchTerm)],
     });
-console.log(result)
-    // 2. If it does, update the count
-    if (result.rows.length > 0  ) {
-      const row = result.rows[0];
-      console.log("row",row)
 
-   const updateResult = await tablesDB.updateRow({
+    // 2. If it does, update the count
+    if (result.rows.length > 0) {
+      const row = result.rows[0];
+
+      await tablesDB.updateRow({
         databaseId: DATABASE_ID,
         tableId: TABLE_ID,
         rowId: row.$id,
@@ -32,7 +30,7 @@ console.log(result)
           count: row.count + 1,
         },
       });
-      console.log("Update Result:", updateResult);
+
       // 3. If it doesn't, create a new document with the search term and count as 1
     } else {
       await tablesDB.createRow({
@@ -49,5 +47,29 @@ console.log(result)
     }
   } catch (error) {
     console.error(error);
+  }
+};
+
+
+/**
+ * Get top 5 trending movies ordered by search count.
+ *
+ * @returns {Promise<Array>} List of trending movies
+ */
+export const getTrendingMovies = async () => {
+  try {
+    const result = await tablesDB.listRows({
+      databaseId: DATABASE_ID,
+      tableId: TABLE_ID,
+      queries: [
+        Query.orderDesc("count"),
+        Query.limit(5),
+      ],
+    });
+
+    return result.rows;
+  } catch (error) {
+    console.error("Failed to fetch trending movies:", error);
+    return [];
   }
 };
