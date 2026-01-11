@@ -8,6 +8,8 @@ const ENDPOINT = import.meta.env.VITE_APPWRITE_ENDPOINT;
 const client = new Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID);
 
 const tablesDB = new TablesDB(client);
+
+
 export const updateSearchCount = async (searchTerm, movie) => {
   // 1. Use Appwrite SDK to check if the search term exists in the database
   try {
@@ -16,19 +18,21 @@ export const updateSearchCount = async (searchTerm, movie) => {
       tableId: TABLE_ID,
       queries: [Query.equal("searchTerm", searchTerm)],
     });
-
+console.log(result)
     // 2. If it does, update the count
-    if (result.rows.length > 0) {
+    if (result.rows.length > 0  ) {
       const row = result.rows[0];
+      console.log("row",row)
 
-      await tablesDB.updateRow({
+   const updateResult = await tablesDB.updateRow({
         databaseId: DATABASE_ID,
         tableId: TABLE_ID,
-        rowId: row.id,
+        rowId: row.$id,
         data: {
           count: row.count + 1,
         },
       });
+      console.log("Update Result:", updateResult);
       // 3. If it doesn't, create a new document with the search term and count as 1
     } else {
       await tablesDB.createRow({

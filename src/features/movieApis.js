@@ -1,3 +1,5 @@
+import { updateSearchCount } from "./appwrite";
+
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_API_TOKEN;
 
@@ -36,6 +38,12 @@ async function getMovies(query = "") {
 
     const data = await response.json();
 
+    // Update search count in Appwrite if a query was made and results exist
+    if (query && data.results.length > 0) {
+      updateSearchCount(query, data.results[0]).catch((err) => {
+        console.error("Failed to update search count:", err);
+      });
+    }
     if (!data.results || !Array.isArray(data.results)) {
       return [];
     }

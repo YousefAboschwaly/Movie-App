@@ -8,11 +8,10 @@ import { useDebounce } from "react-use";
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("")
-
-  useDebounce(()=>{setDebouncedSearchTerm(searchTerm)}, 500, [searchTerm])
+  useDebounce(()=>{setDebouncedSearchTerm(searchTerm)}, 1000, [searchTerm])
 
   const {data , isLoading , error} = useMovies({query: debouncedSearchTerm})
-  console.log(data , error , isLoading);
+
 
   return (
     <main >
