@@ -37,7 +37,6 @@ const movie = {
 
 export default function MovieDetails() {
   const { id } = useParams();
-  console.log(id);
   return (
     <section className="movie-modal">
       <div className="content ">
