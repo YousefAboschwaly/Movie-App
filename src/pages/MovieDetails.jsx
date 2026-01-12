@@ -40,8 +40,8 @@ export default function MovieDetails() {
   const {id} = useParams()
   console.log(id)
   return (
-<div className="bg-[hsl(256,33%,10%)] rounded-3xl overflow-hidden max-w-4xl w-full mx-auto shadow-[0px_12px_32px_0px_#CECEFB05_inset,0px_0px_100px_0px_#AB8BFF4D]">
-      <div className="p-8 md:p-10">
+<div className="bg-[hsl(256,33%,10%)] rounded-3xl overflow-hidden  w-full shadow-[0px_12px_32px_0px_#CECEFB05_inset,0px_0px_100px_0px_#AB8BFF4D]">
+      <div className="p-8 md:p-10 lg:py-15 lg:px-30 space-y-6 md:space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 md:mb-8">
           <div>
