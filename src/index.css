@@ -5,6 +5,7 @@
 
 @theme {
   --color-primary: #030014;
+  --color-secondary: #221f3d;
 
   --color-light-100: #cecefb;
   --color-light-200: #a8b5db;
@@ -146,6 +147,97 @@
       @apply text-gray-100 font-medium text-base;
     }
   }
+
+
+  .movie-modal {
+    @apply bg-card rounded-3xl overflow-hidden;
+    box-shadow: 
+      0px 12px 32px 0px #CECEFB05 inset,
+      0px 0px 100px 0px #AB8BFF4D;
+  }
+
+  .trailer-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(to top, hsl(var(--card)) 0%, transparent 50%);
+  }
+
+  .genre-tag {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-colors;
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .genre-tag:hover {
+    background: hsl(var(--accent) / 0.2);
+    border-color: hsl(var(--accent) / 0.5);
+  }
+
+  .info-label {
+    @apply text-muted-foreground font-medium min-w-[140px];
+  }
+
+  .info-value {
+    @apply text-foreground;
+  }
+
+  .score-badge {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg font-semibold;
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .trending-badge {
+    @apply flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium;
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #D6C7FF, #AB8BFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .play-button {
+    @apply flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .play-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .visit-button {
+    @apply flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all;
+    background: transparent;
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+
+  .visit-button:hover {
+    background: hsl(var(--secondary));
+    border-color: hsl(var(--accent) / 0.5);
+  }
+
+  .poster-image {
+    @apply rounded-xl object-cover w-full h-full;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .backdrop-container {
+    @apply relative rounded-xl overflow-hidden;
+  }
+
+  .backdrop-container::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(to top, hsl(var(--card)) 0%, transparent 30%);
+  }
+
 }
 
 @utility text-gradient {
