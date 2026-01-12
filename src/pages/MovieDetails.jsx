@@ -1,11 +1,10 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { RatingBadge } from "../components/movie-details/RatingBadge";
-import { MoviePoster } from '../components/movie-details/MoviePoster';
-import { TrailerPreview } from '../components/movie-details/TrailerPreview';
+import { MoviePoster } from "../components/movie-details/MoviePoster";
+import { TrailerPreview } from "../components/movie-details/TrailerPreview";
 import { GenreTags } from "../components/movie-details/GenreTags";
 import { InfoRow } from "../components/movie-details/InfoRow";
 import { ArrowRight } from "lucide-react";
-
 
 const movie = {
   title: "Predator: Badlands",
@@ -37,22 +36,25 @@ const movie = {
 };
 
 export default function MovieDetails() {
-  const {id} = useParams()
-  console.log(id)
+  const { id } = useParams();
   return (
-<div className="bg-[hsl(256,33%,10%)] rounded-3xl overflow-hidden  w-full shadow-[0px_12px_32px_0px_#CECEFB05_inset,0px_0px_100px_0px_#AB8BFF4D]">
-      <div className="p-8 md:p-10 lg:py-15 lg:px-30 space-y-6 md:space-y-8">
+    <section className="movie-modal">
+      <div className="content ">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 md:mb-8">
+        <div className="flex flex-col items-start sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 md:mb-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-[hsl(240,20%,91%)] tracking-tight mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-white  mb-2">
               {movie.title}
             </h1>
-            <div className="flex items-center gap-2 text-[hsl(240,30%,75%)]">
+            <div className="flex items-center gap-2 text-light-200">
               <span>{movie.year}</span>
-              <span className="w-1 h-1 rounded-full bg-[hsl(240,30%,75%)]" />
+
+              <span>•</span>
+
               <span>{movie.rating}</span>
-              <span className="w-1 h-1 rounded-full bg-[hsl(240,30%,75%)]" />
+
+              <span>•</span>
+
               <span>{movie.duration}</span>
             </div>
           </div>
@@ -105,10 +107,16 @@ export default function MovieDetails() {
           <InfoRow label="Budget" value={movie.budget} />
           <InfoRow label="Revenue" value={movie.revenue} />
           <InfoRow label="Tagline">
-            <span className="italic bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">{movie.tagline}</span>
+            <span className="italic bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">
+              {movie.tagline}
+            </span>
           </InfoRow>
-          <InfoRow label="Production Companies" value={movie.productionCompanies.join(" · ")} />
+          <InfoRow
+            label="Production Companies"
+            value={movie.productionCompanies.join(" · ")}
+          />
         </div>
       </div>
-    </div>  )
+    </section>
+  );
 }
