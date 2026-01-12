@@ -1,11 +1,12 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import Movies from "./components/Movies";
-import Search from "./components/Search";
-import TrendingMovies from "./components/TrendingMovies";
+import Header from './../components/Header';
+import Search from './../components/Search';
+import TrendingMovies from './../components/TrendingMovies';
+import Movies from './../components/Movies';
+
 
 export default function Home() {
-    const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <main>
@@ -17,5 +18,5 @@ export default function Home() {
         <Movies searchTerm={searchTerm} />
       </div>
     </main>
-  )
+  );
 }
