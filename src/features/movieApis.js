@@ -55,7 +55,6 @@ async function getMovies(query = "") {
   }
 }
 
-
 /**
  * Fetch movie details by movie ID from TMDB
  *
@@ -63,15 +62,16 @@ async function getMovies(query = "") {
  * @returns {Promise<Object>} Movie details
  */
 async function getMovieDetails(movieId) {
-  const endpoint = `${API_BASE_URL}/movie/${movieId}`;
+  const endpoint = `${API_BASE_URL}/movie/${movieId}?append_to_response=videos,credits,images,release_dates,external_ids`;
 
   const response = await fetch(endpoint, API_OPTIONS);
 
   if (!response.ok) {
     throw new Error("Failed to fetch movie details");
   }
-
-  return await response.json();
+  const data = await response.json();
+  // console.log("Response", data);
+  return data;
 }
 
 export { getMovies, getMovieDetails };

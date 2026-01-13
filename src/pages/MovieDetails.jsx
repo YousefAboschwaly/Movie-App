@@ -1,119 +1,154 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
 import { RatingBadge } from "../components/movie-details/RatingBadge";
 import { MoviePoster } from "../components/movie-details/MoviePoster";
 import { TrailerPreview } from "../components/movie-details/TrailerPreview";
 import { GenreTags } from "../components/movie-details/GenreTags";
 import { InfoRow } from "../components/movie-details/InfoRow";
-import { ArrowRight } from "lucide-react";
+import Spinner from "../components/Spinner";
 
-const movie = {
-  title: "Predator: Badlands",
-  year: 2025,
-  rating: "R",
-  duration: "1h 47m",
-  score: 7.8,
-  votes: "1.3K",
-  trending: 1,
-  genres: ["Action", "Science Fiction", "Adventure"],
-  overview:
-    "Cast out from his clan, a young Predator finds an unlikely ally in a damaged android and embarks on a treacherous journey in search of the ultimate adversary.",
-  releaseDate: "November 5, 2025 (Worldwide)",
-  countries: ["United States"],
-  status: "Released",
-  languages: ["English"],
-  budget: "$105 million",
-  revenue: "$184.5 million",
-  tagline: "First hunt. Last chance.",
-  productionCompanies: [
-    "20th Century Studios",
-    "Lawrence Gordon Productions",
-    "Davis Entertainment",
-    "Toberoff Productions",
-    "TSG Entertainment",
-  ],
-  posterPath: "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
-  backdropPath: "/ebyxeBh56QNXxSJgTnmz7fXAlwk.jpg",
-};
+import useMovieDetails from "../hooks/useMovieDetails";
 
 export default function MovieDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
+  const { data: movie, isLoading, error } = useMovieDetails(id);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
++        <p className="text-red-500">
++          {error?.message || "An error occurred"}
++        </p>
++      </div>
+    );
+  }
+
+  // ✅ Destructuring movie data
+  const {
+    title,
+    trailer,
+    year,
+    rating,
+    homepage,
+    duration,
+    score,
+    votes,
+    trending,
+    poster_path,
+    backdrop_path,
+    tagline,
+    genres,
+    overview,
+    releaseDate,
+    countries,
+    status,
+    spoken_languages,
+    budget,
+    revenue,
+    productionCompanies,
+  } = movie;
+
   return (
     <section className="movie-modal">
-      <div className="content ">
+      <div className="content">
         {/* Header */}
-        <div className="flex flex-col items-start sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 md:mb-8">
+        <div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white  mb-2">
-              {movie.title}
-            </h1>
-            <div className="flex items-center gap-2 text-light-200">
-              <span>{movie.year}</span>
-
-              <span>•</span>
-
-              <span>{movie.rating}</span>
-
-              <span>•</span>
-
-              <span>{movie.duration}</span>
-            </div>
+            <button
+              onClick={() => window.history.length > 1 ? navigate(-1) : navigate("/")}
+              className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-lg bg-white/10 hover:bg-white/20 transition text-sm text-white cursor-pointer"
+            >
+              <ArrowLeft /> Back
+            </button>
           </div>
-          <RatingBadge
-            rating={movie.score}
-            votes={movie.votes}
-            trending={movie.trending}
-          />
+
+          <div className="flex flex-col items-start  sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 md:mb-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                {title}
+              </h2>
+
+              <div className="flex items-center gap-2 text-light-200">
+                <span>{year}</span>
+                <span>•</span>
+                <span>{rating}</span>
+                <span>•</span>
+                <span>{duration}</span>
+              </div>
+            </div>
+
+            <RatingBadge rating={score} votes={votes} trending={trending} />
+          </div>
         </div>
 
         {/* Media Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 md:mb-8 ">
           <div className="md:col-span-1">
             <MoviePoster
-              posterUrl={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
-              releaseInfo="NOVEMBER 5"
-              platform="20TH CENTURY"
+              posterUrl={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : '/no-movie.png'
+              }
             />
           </div>
+
           <div className="md:col-span-2">
             <TrailerPreview
-              backdropUrl={`https://image.tmdb.org/t/p/w500${movie.backdropPath}`}
-              duration="02:31"
-              tagline={movie.tagline}
+              backdropUrl={
+                backdrop_path
+                  ? `https://image.tmdb.org/t/p/w1280${backdrop_path}`
+                  : '/No-poster.png'
+              }
+              trailerKey={trailer?.key}
             />
           </div>
         </div>
 
         {/* Genres */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 mb-6">
-          <span className="text-[hsl(256,68%,75%)] text-sm min-w-">Genres</span>
+          <span className="label">Genres</span>
+
           <div className="flex flex-wrap items-center gap-3 flex-1">
-            <GenreTags genres={movie.genres} />
-            <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all bg-transparent border border-[hsl(252,32%,25%)] text-[hsl(240,20%,91%)] hover:bg-[hsl(252,32%,18%)] hover:border-[hsl(256,68%,75%,0.5)] ml-auto  sm:flex">
-              <span>Visit Homepage</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <GenreTags genres={genres} />
+
+            {homepage && (
+              <a
+                href={homepage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gradient"
+              >
+                <span>Visit Homepage</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            )}
           </div>
         </div>
 
         {/* Info Table */}
-        <div className="space-y-0 divide-y divide-[hsl(252,32%,25%,0.5)]">
-          <InfoRow label="Overview" value={movie.overview} />
-          <InfoRow label="Release date" value={movie.releaseDate} />
-          <InfoRow label="Countries" value={movie.countries.join(" · ")} />
-          <InfoRow label="Status">
-            <span className="text-green-400">{movie.status}</span>
-          </InfoRow>
-          <InfoRow label="Language" value={movie.languages.join(" · ")} />
-          <InfoRow label="Budget" value={movie.budget} />
-          <InfoRow label="Revenue" value={movie.revenue} />
-          <InfoRow label="Tagline">
-            <span className="italic bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent">
-              {movie.tagline}
-            </span>
-          </InfoRow>
+        <div className="space-y-0 md:max-w-220">
+          <InfoRow label="Overview" value={overview} />
+          <InfoRow label="Release date" value={releaseDate} />
+          <InfoRow label="Countries" value={countries?.join(" • ")} />
+          <InfoRow label="Status" value={status} />
+          <InfoRow label="Language" value={spoken_languages?.join(" • ")} />
+          <InfoRow label="Budget" value={budget} />
+          <InfoRow label="Revenue" value={revenue} />
+          <InfoRow label="Tagline" value={tagline} />
           <InfoRow
             label="Production Companies"
-            value={movie.productionCompanies.join(" · ")}
+            value={productionCompanies?.join("  •  ")}
           />
         </div>
       </div>
