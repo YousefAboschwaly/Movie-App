@@ -23,7 +23,7 @@ export default function TrendingMovies() {
 
       <ul>
         {trendingMovies?.map((movie, index) => (
-          <Link to={`movie/${movie.movie_id}` } key={movie.$id}>
+          <Link to={`/movie/${movie.movie_id}`} key={movie.$id}>
             <li>
               <p>{index + 1}</p>
               <img src={movie.poster_url} alt={movie.title} />
