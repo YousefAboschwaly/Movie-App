@@ -10,7 +10,6 @@ export default function MoviePagination({
 
 
   const handlePrevious = () => {
-    console.log("handlePrevious called, current page:", page);
     if (page > 1) {
       onPageChange((prev) => prev - 1);
     }
