@@ -17,7 +17,7 @@ export default function MovieDetails() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center min-h-screen">
         <Spinner />
       </div>
     );
@@ -25,15 +25,18 @@ export default function MovieDetails() {
 
   if (error) {
     return (
-      <p className="text-red-500">
-        {error?.message || error?.toString() || "An error occurred"}
-      </p>
+      <div className="flex justify-center items-center min-h-screen">
++        <p className="text-red-500">
++          {error?.message || "An error occurred"}
++        </p>
++      </div>
     );
   }
 
   // ✅ Destructuring movie data
   const {
     title,
+    trailer,
     year,
     rating,
     homepage,
@@ -62,7 +65,7 @@ export default function MovieDetails() {
         <div>
           <div>
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => window.history.length > 1 ? navigate(-1) : navigate("/")}
               className="inline-flex items-center gap-2 px-4 py-2 mb-2 rounded-lg bg-white/10 hover:bg-white/20 transition text-sm text-white cursor-pointer"
             >
               <ArrowLeft /> Back
@@ -107,7 +110,7 @@ export default function MovieDetails() {
                   ? `https://image.tmdb.org/t/p/w1280${backdrop_path}`
                   : '/No-poster.png'
               }
-              trailerKey={movie.trailer?.key}
+              trailerKey={trailer?.key}
             />
           </div>
         </div>
@@ -134,12 +137,12 @@ export default function MovieDetails() {
         </div>
 
         {/* Info Table */}
-        <div className="space-y-0    md:max-w-220">
+        <div className="space-y-0 md:max-w-220">
           <InfoRow label="Overview" value={overview} />
           <InfoRow label="Release date" value={releaseDate} />
-          <InfoRow label="Countries" value={countries?.join(" · ")} />
+          <InfoRow label="Countries" value={countries?.join(" • ")} />
           <InfoRow label="Status" value={status} />
-          <InfoRow label="Language" value={spoken_languages?.join(" · ")} />
+          <InfoRow label="Language" value={spoken_languages?.join(" • ")} />
           <InfoRow label="Budget" value={budget} />
           <InfoRow label="Revenue" value={revenue} />
           <InfoRow label="Tagline" value={tagline} />

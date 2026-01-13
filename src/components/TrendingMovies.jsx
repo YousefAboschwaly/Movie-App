@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useTrendingMovies from "../hooks/useTrendingMovies";
 import Spinner from "./Spinner";
 
