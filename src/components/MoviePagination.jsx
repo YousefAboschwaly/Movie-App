@@ -1,7 +1,6 @@
 
 export default function MoviePagination({
   page,
-  currentPage,
   totalPages,
   onPageChange,
   isLoading,
