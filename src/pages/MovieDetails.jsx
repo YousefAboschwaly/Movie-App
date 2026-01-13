@@ -1,4 +1,4 @@
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { RatingBadge } from "../components/movie-details/RatingBadge";
@@ -55,7 +55,6 @@ export default function MovieDetails() {
     productionCompanies,
   } = movie;
 
-
   return (
     <section className="movie-modal">
       <div className="content">
@@ -93,13 +92,21 @@ export default function MovieDetails() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 md:mb-8 ">
           <div className="md:col-span-1">
             <MoviePoster
-              posterUrl={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              posterUrl={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : '/no-movie.png'
+              }
             />
           </div>
 
           <div className="md:col-span-2">
             <TrailerPreview
-              backdropUrl={`https://image.tmdb.org/t/p/w1280${backdrop_path}`}
+              backdropUrl={
+                backdrop_path
+                  ? `https://image.tmdb.org/t/p/w1280${backdrop_path}`
+                  : '/No-poster.png'
+              }
               trailerKey={movie.trailer?.key}
             />
           </div>
@@ -112,7 +119,7 @@ export default function MovieDetails() {
           <div className="flex flex-wrap items-center gap-3 flex-1">
             <GenreTags genres={genres} />
 
-           {homepage && (
+            {homepage && (
               <a
                 href={homepage}
                 target="_blank"
