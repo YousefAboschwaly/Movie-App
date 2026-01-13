@@ -60,7 +60,7 @@
   }
 
   .wrapper {
-    @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+    @apply px-5 py-12 xs:p-10 max-w-7xl w-full md:p-0 mx-auto flex flex-col relative z-10;
   }
 
   .trending {
@@ -100,7 +100,7 @@
   }
 
   .all-movies {
-    @apply space-y-9;
+    @apply space-y-9 my-10;
 
     & ul {
       @apply grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
@@ -145,6 +145,11 @@
     & .content .year {
       @apply text-gray-100 font-medium text-base;
     }
+  }
+
+  /* Pagination Styles */
+  .pagination-btn {
+    @apply p-3 bg-dark-100 rounded-lg cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
   }
 }
 
