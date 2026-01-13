@@ -82,8 +82,6 @@ console.log(movie)
           <div className="md:col-span-1">
             <MoviePoster
               posterUrl={`https://image.tmdb.org/t/p/w500${poster_path}`}
-              releaseInfo="NOVEMBER 5"
-              platform="20TH CENTURY"
             />
           </div>
 
@@ -123,9 +121,7 @@ console.log(movie)
           </InfoRow>
           <InfoRow
             label="Language"
-            value={spoken_languages
-              ?.map((lang) => lang.english_name)
-              ?.join(" · ")}
+            value={spoken_languages?.join(" · ")}
           />
           <InfoRow label="Budget" value={budget} />
           <InfoRow label="Revenue" value={revenue} />
