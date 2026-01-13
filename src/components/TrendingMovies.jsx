@@ -23,12 +23,12 @@ export default function TrendingMovies() {
 
       <ul>
         {trendingMovies?.map((movie, index) => (
-          <Link to={`movie/${movie.movie_id}` } key={movie.$id}>
-            <li>
+          <li key={movie.$id}>
+            <Link to={`/movie/${movie.movie_id}`}>
               <p>{index + 1}</p>
               <img src={movie.poster_url} alt={movie.title} />
-            </li>
-          </Link>
+            </Link>
+          </li>
         ))}
       </ul>
     </section>

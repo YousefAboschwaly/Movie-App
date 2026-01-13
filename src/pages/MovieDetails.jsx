@@ -55,7 +55,6 @@ export default function MovieDetails() {
     productionCompanies,
   } = movie;
 
-  console.log(movie);
 
   return (
     <section className="movie-modal">
@@ -113,15 +112,17 @@ export default function MovieDetails() {
           <div className="flex flex-wrap items-center gap-3 flex-1">
             <GenreTags genres={genres} />
 
-            <a
-              href={homepage}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gradient"
-            >
-              <span>Visit Homepage</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+           {homepage && (
+              <a
+                href={homepage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gradient"
+              >
+                <span>Visit Homepage</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            )}
           </div>
         </div>
 
