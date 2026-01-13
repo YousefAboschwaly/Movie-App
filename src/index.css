@@ -153,8 +153,9 @@
 
     & .content {
       @apply bg-dark-100  px-6 py-7 md:p-7 lg:p-12.5 rounded-xl space-y-6 md:space-y-8;
-      box-shadow: 0px 12px 32px 0px #cecefb05 inset;
-      box-shadow: 0px 0px 100px 0px #ab8bff4d;
+      box-shadow: 
+        0px 12px 32px 0px #cecefb05 inset,
+        0px 0px 100px 0px #ab8bff4d;
     }
   }
   .label{

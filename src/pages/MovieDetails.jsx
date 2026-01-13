@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { RatingBadge } from "../components/movie-details/RatingBadge";
@@ -56,6 +56,7 @@ export default function MovieDetails() {
   } = movie;
 
   console.log(movie);
+
   return (
     <section className="movie-modal">
       <div className="content">
