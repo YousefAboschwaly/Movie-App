@@ -5,10 +5,11 @@
 
 @theme {
   --color-primary: #030014;
+  --color-secondary: #221f3d;
 
+  --color-light-50: #d6c7ff;
   --color-light-100: #cecefb;
   --color-light-200: #a8b5db;
-
   --color-gray-100: #9ca4ab;
 
   --color-dark-100: #0f0d23;
@@ -71,7 +72,7 @@
     }
 
     & ul li {
-      @apply min-w-[230px] flex flex-row items-center;
+      @apply min-w-[230px] flex flex-row items-center cursor-pointer;
     }
 
     & ul li p {

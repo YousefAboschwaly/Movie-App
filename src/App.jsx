@@ -1,21 +1,19 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Movies from "./components/Movies";
-import Search from "./components/Search";
-import TrendingMovies from "./components/TrendingMovies";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MovieDetails from "./pages/MovieDetails";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const queryClient = new QueryClient();
 
   return (
-    <main>
-      <div className="pattern" />
-      <div className="wrapper">
-        <Header />
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <TrendingMovies />
-        <Movies searchTerm={searchTerm} />
-      </div>
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }

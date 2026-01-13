@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 export default function MovieCard({
-  movie: { title, poster_path, vote_average, original_language, release_date },
+
+  movie: { title, poster_path, vote_average, original_language, release_date,id },
 }) {
   return (
     <div className="movie-card">
+      <Link to={`movie/${id}`}>
       <img
         src={
           poster_path
@@ -30,6 +34,7 @@ export default function MovieCard({
           </p>
         </div>
       </div>
+      </Link>
     </div>
   );
 }
