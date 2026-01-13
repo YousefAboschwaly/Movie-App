@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useTrendingMovies from "../hooks/useTrendingMovies";
 import Spinner from "./Spinner";
 
 export default function TrendingMovies() {
+  const navigate = useNavigate();
   const { data: trendingMovies, isLoading, error } = useTrendingMovies();
 
   if (isLoading)
@@ -22,14 +23,14 @@ export default function TrendingMovies() {
       <h2>Trending Movies</h2>
 
       <ul>
-        {trendingMovies?.map((movie, index) => (
-          <li key={movie.$id}>
-            <Link to={`/movie/${movie.movie_id}`}>
-              <p>{index + 1}</p>
-              <img src={movie.poster_url} alt={movie.title} />
-            </Link>
-          </li>
-        ))}
+        <ul>
+          {trendingMovies?.map((movie, index) => (
+            <li key={movie.$id} className="trending-item" onClick={()=>navigate(`/movie/${movie.movie_id}`)}>
+                <p>{index + 1}</p>
+                <img src={movie.poster_url} alt={movie.title} />
+            </li>
+          ))}
+        </ul>
       </ul>
     </section>
   );

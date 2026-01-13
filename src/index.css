@@ -71,8 +71,8 @@
       @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
     }
 
-    & ul a {
-      @apply min-w-[230px] flex flex-row items-center;
+    & ul li {
+      @apply min-w-[230px] flex flex-row items-center cursor-pointer;
     }
 
     & ul li p {
