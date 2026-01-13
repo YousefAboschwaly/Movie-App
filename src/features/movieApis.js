@@ -24,21 +24,19 @@ const API_OPTIONS = {
  * @returns {Promise<Array>} List of movie objects
  * @throws {Error} If the API request fails
  */
-async function getMovies(query = "") {
-  try {
-    const endpoint = query
-      ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-      : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+ async function getMovies(query = "", page = 1){
+  const endpoint = query
+    ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${page}`
+    : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&page=${page}`;
 
-    const response = await fetch(endpoint, API_OPTIONS);
+  const response = await fetch(endpoint, API_OPTIONS);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch movies");
-    }
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies");
+  }
 
-    const data = await response.json();
-
-    // Update search count in Appwrite if a query was made and results exist
+  const data = await response.json();
+ // Update search count in Appwrite if a query was made and results exist
     if (query && data.results.length > 0) {
       updateSearchCount(query, data.results[0]).catch((err) => {
         console.error("Failed to update search count:", err);
@@ -47,12 +45,12 @@ async function getMovies(query = "") {
     if (!data.results || !Array.isArray(data.results)) {
       return [];
     }
-
-    return data.results;
-  } catch (err) {
-    console.error("Error fetching movies:", err);
-    throw err;
-  }
+  return {
+    page: data.page,
+    results: data.results || [],
+    total_pages: data.total_pages,
+    total_results: data.total_results,
+  };
 }
 
 /**

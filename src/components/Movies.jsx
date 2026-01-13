@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useDebounce } from "react-use";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
+import MoviePagination from "./MoviePagination";
 import Spinner from "./Spinner";
 
 export default function Movies({ searchTerm }) {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const { movies, currentPage, totalPages, isFetching, error } = useMovies({
+    query: debouncedSearchTerm,
+  });
+  const [page, setPage] = useState(currentPage || 1);
   useDebounce(
     () => {
       setDebouncedSearchTerm(searchTerm);
@@ -14,13 +19,8 @@ export default function Movies({ searchTerm }) {
     [searchTerm]
   );
 
-  const {
-    data: movies,
-    isLoading,
-    error,
-  } = useMovies({ query: debouncedSearchTerm });
 
-  if (isLoading)
+  if (isFetching)
     return (
       <div className="flex justify-center items-center">
         <Spinner />
@@ -35,12 +35,19 @@ export default function Movies({ searchTerm }) {
 
   return (
     <section className="all-movies ">
-      <h2 className="mt-40">All Movies</h2>
+      <h2 >Popular</h2>
       <ul>
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </ul>
+      <MoviePagination
+        page={page}
+        onPageChange={setPage}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        isLoading={isFetching}
+      />
     </section>
   );
 }

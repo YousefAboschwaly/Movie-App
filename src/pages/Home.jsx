@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main>
       <div className="pattern" />
-      <div className="wrapper">
+      <div className="wrapper ">
         <Header />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TrendingMovies />
