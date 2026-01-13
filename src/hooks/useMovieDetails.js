@@ -9,7 +9,9 @@ export default function useMovieDetails(id) {
     enabled: !!id,
     select: (movie) => ({
       title: movie.title,
-
+      trailer: movie.videos?.results?.find(
+    (v) => v.type === "Trailer" && v.site === "YouTube"
+  ) || null,
       year: movie.release_date?.split("-")[0] || "N/A",
 
       duration: movie.runtime
@@ -25,7 +27,7 @@ export default function useMovieDetails(id) {
       votes: movie.vote_count || "N/A",
       homepage: movie.homepage,
       overview: movie.overview,
-      tagline: movie.tagline,
+      tagline: movie.tagline || "N/A",
       status: movie.status,
       releaseDate: formatReleaseDate(movie.release_date),
 

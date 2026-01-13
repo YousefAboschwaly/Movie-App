@@ -4,7 +4,7 @@ export const GenreTags = ({ genres }) => {
       {genres.map((genre) => (
         <span 
           key={genre} 
-          className="px-4 py-2 rounded-full text-sm font-medium transition-colors bg-[hsl(252,32%,18%)] text-[hsl(240,20%,91%)] border border-[hsl(252,32%,25%)] hover:bg-[hsl(256,68%,75%,0.2)] hover:border-[hsl(256,68%,75%,0.5)]"
+          className="px-4.5 py-2 rounded-md  font-semibold transition-colors bg-secondary text-white hover:bg-[#ab94eb33] "
         >
           {genre}
         </span>

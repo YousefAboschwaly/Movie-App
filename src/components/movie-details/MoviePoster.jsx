@@ -4,7 +4,7 @@ export const MoviePoster = ({ posterUrl}) => {
       <img
         src={posterUrl}
         alt="Movie poster"
-        className="w-full h-full object-cover rounded-[10px]"
+        className="w-full h-full  rounded-[10px] "
       />
 
     </div>
