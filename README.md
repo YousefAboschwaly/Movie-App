@@ -61,7 +61,7 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/adrianhajdin/react-movies.git
+git clone https://github.com/YousefAboschwaly/Movie-App.git
 cd react-movies
 
 ```
@@ -79,11 +79,13 @@ npm install
 Create a new file named `.env.local` in the root of your project and add the following content:
 
 ```env
-VITE_TMDB_API_KEY=
+VITE_API_TOKEN = 
 
-VITE_APPWRITE_PROJECT_ID=
-VITE_APPWRITE_DATABASE_ID=
-VITE_APPWRITE_COLLECTION_ID=
+VITE_APPWRITE_PROJECT_ID = 
+VITE_APPWRITE_DATABASE_ID = 
+VITE_APPWRITE_COLLECTION_ID = 
+
+VITE_APPWRITE_ENDPOINT = 
 ```
 
 Replace the placeholder values with your actual **[TheMovieDatabase API](https://developer.themoviedb.org/reference/intro/getting-started)** and **[Appwrite](https://apwr.dev/JSM050)** credentials.
