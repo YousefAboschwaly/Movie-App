@@ -8,12 +8,12 @@ export default function Movies({
   currentPage,
   onPageChange,
 }) {
-  const { movies, totalPages, isFetching, error } = useMovies({
+  const { movies, totalPages,isLoading , error } = useMovies({
     query: searchTerm,
     page: currentPage,
   });
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center">
         <Spinner />
@@ -43,7 +43,7 @@ export default function Movies({
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={onPageChange}
-        isLoading={isFetching}
+        isLoading={isLoading}
       />
     </section>
   );

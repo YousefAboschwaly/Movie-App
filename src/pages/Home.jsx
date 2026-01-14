@@ -49,7 +49,6 @@ export default function Home() {
   const handlePageChange = (page) => {
     if (page === currentPage) return;
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

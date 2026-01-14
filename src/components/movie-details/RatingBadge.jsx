@@ -1,6 +1,7 @@
 import { Star, TrendingUp } from "lucide-react";
 
 export const RatingBadge = ({ rating, votes, trending }) => {
+  if(rating==='N/A' && votes==='N/A' ) return null;
   return (
     <div className="flex items-center gap-2.5 md:gap-3 flex-wrap text-light-200">
       <div className="flex items-center gap-2.5 px-4 py-2 rounded-md font-semibold bg-secondary text-xs md:text-[16px] ">
