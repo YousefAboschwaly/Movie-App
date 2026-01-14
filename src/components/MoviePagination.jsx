@@ -1,22 +1,20 @@
-
 export default function MoviePagination({
-  page,
+  currentPage,
   totalPages,
   onPageChange,
   isLoading,
 }) {
   // Limit display to max 500 pages (TMDB API limit)
-  const maxPages = Math.min(totalPages, 500);
-
+  const maxPages = Math.min(totalPages, 50);
 
   const handlePrevious = () => {
-    if (page > 1) {
+    if (currentPage > 1) {
       onPageChange((prev) => prev - 1);
     }
   };
 
   const handleNext = () => {
-    if (page < maxPages) {
+    if (currentPage < maxPages) {
       onPageChange((prev) => prev + 1);
     }
   };
@@ -28,21 +26,23 @@ export default function MoviePagination({
       {/* Previous Button */}
       <button
         onClick={handlePrevious}
-        disabled={page === 1 || isLoading}
+        disabled={currentPage === 1 || isLoading}
         className="pagination-btn "
         aria-label="Previous page"
       >
         <img src="/arrow-left-tiny.svg" alt="arrow-left" />
       </button>
 
-
       {/* Page Numbers */}
-      <h4 className="font-bold text-xl text-white">{page}<span className="text-gray-100 font-normal"> / {maxPages} </span></h4>
+      <h4 className="font-bold text-xl text-white">
+        {currentPage}
+        <span className="text-gray-100 font-normal"> / {maxPages} </span>
+      </h4>
 
       {/* Next Button */}
       <button
         onClick={handleNext}
-        disabled={page === maxPages || isLoading}
+        disabled={currentPage === maxPages || isLoading}
         className="pagination-btn"
         aria-label="Next page"
       >
