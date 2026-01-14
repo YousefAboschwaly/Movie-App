@@ -1,52 +1,49 @@
-import { useState } from "react";
-import { useDebounce } from "react-use";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MoviePagination from "./MoviePagination";
 import Spinner from "./Spinner";
 
-export default function Movies({ searchTerm }) {
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-  const { movies, currentPage, totalPages, isFetching, error } = useMovies({
-    query: debouncedSearchTerm,
+export default function Movies({
+  searchTerm,
+  currentPage,
+  onPageChange,
+}) {
+  const { movies, totalPages,isLoading , error } = useMovies({
+    query: searchTerm,
+    page: currentPage,
   });
-  const [page, setPage] = useState(currentPage || 1);
-  useDebounce(
-    () => {
-      setDebouncedSearchTerm(searchTerm);
-    },
-    1000,
-    [searchTerm]
-  );
 
-
-  if (isFetching)
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center">
         <Spinner />
       </div>
     );
-  if (error)
+  }
+
+  if (error) {
     return (
       <p className="text-red-500">
-        {error?.message || error?.toString() || "An error occurred"}
+        {error?.message || "An error occurred"}
       </p>
     );
+  }
 
   return (
-    <section className="all-movies ">
-      <h2 >Popular</h2>
+    <section className="all-movies">
+      <h2>Popular</h2>
+
       <ul>
         {movies?.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </ul>
+
       <MoviePagination
-        page={page}
-        onPageChange={setPage}
         currentPage={currentPage}
         totalPages={totalPages}
-        isLoading={isFetching}
+        onPageChange={onPageChange}
+        isLoading={isLoading}
       />
     </section>
   );

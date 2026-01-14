@@ -108,7 +108,7 @@ export default function MovieDetails() {
               backdropUrl={
                 backdrop_path
                   ? `https://image.tmdb.org/t/p/w1280${backdrop_path}`
-                  : '/No-poster.png'
+                  : '/No-Poster.png'
               }
               trailerKey={trailer?.key}
             />
@@ -140,16 +140,16 @@ export default function MovieDetails() {
         <div className="space-y-0 md:max-w-220">
           <InfoRow label="Overview" value={overview} />
           <InfoRow label="Release date" value={releaseDate} />
-          <InfoRow label="Countries" value={countries?.join(" • ")} />
+          {!countries.length  && <InfoRow label="Countries" value={countries?.join(" • ")} />}
           <InfoRow label="Status" value={status} />
-          <InfoRow label="Language" value={spoken_languages?.join(" • ")} />
+         { !spoken_languages && <InfoRow label="Language" value={spoken_languages?.join(" • ")} />}
           <InfoRow label="Budget" value={budget} />
           <InfoRow label="Revenue" value={revenue} />
           <InfoRow label="Tagline" value={tagline} />
-          <InfoRow
+          {!productionCompanies && <InfoRow
             label="Production Companies"
             value={productionCompanies?.join("  •  ")}
-          />
+          />}
         </div>
       </div>
     </section>
